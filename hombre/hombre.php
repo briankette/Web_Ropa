@@ -34,9 +34,6 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 	<meta charset="UTF-8">
 	<title>DAISING - Hombre</title>
 	<link rel="shortcut icon" type="image/x-icon" href="../fotos/logo.png">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -51,68 +48,99 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 	<?php include("..\header\header.php"); ?>
 
 	<nav id="barra" aria-label="breadcrumb" role="navigation">
-	  <ol class="breadcrumb">
-	    <li class="breadcrumb-item"><a id="bread" href="../pagina_principal/index.php">Inicio</a></li>
-	    <li class="breadcrumb-item" aria-current="page"><a href="../hombre/hombre.php" id="bread">Categoria Hombre</a></li>
-	    <li class="breadcrumb-item" aria-current="page"><a id="bread">Pagina <?php echo $pagina; ?></a></li>
-	  </ol>
+	  	<ol class="breadcrumb">
+	    	<li class="breadcrumb-item">
+	    		<a id="bread" href="../pagina_principal/index.php">Inicio</a>
+	    	</li>
+	    	<li class="breadcrumb-item" aria-current="page">
+	    		<a href="../hombre/hombre.php" id="bread">Categoria Hombre</a>
+	    	</li>
+	    	<li class="breadcrumb-item" aria-current="page">
+	    		<a id="bread">Pagina <?php echo $pagina; ?></a>
+	    	</li>
+	  	</ol>
 	</nav>
 
 	<article id="productos">
 		<div class="section">
-		  <h3>Indumentaria para Hombre</h3>
-		  <div id="divider">
-			<hr style="float: left;"><i class="material-icons">store</i><hr style="float: right;">
-		  </div>
+			<h3>Indumentaria para Hombre</h3>
+			<div id="divider">
+				<hr style="float: left;">
+				<i class="material-icons">store</i>
+				<hr style="float: right;">
+			</div>
 		</div>
+
 		<div class="row">
-
-    <?php foreach ($articulos as $articulo): ?>
-
+    	<?php foreach ($articulos as $articulo): ?>
     	<div class="row">
-    	  <div id="seleccion_producto" class="col s12 m6 l3">
-		    <a style="text-decoration:none" href="../producto/Producto.php?id=<?php echo $articulo['id']; ?> "><img src="../fotos/<?php echo $articulo['Foto']; ?>" width="200px" ></br>
-		    <p style="margin-bottom: 5px; margin-top: 10px; font-family: 'Spectral SC', serif; font-size: 15px;"><?php echo $articulo['Descripcion']; ?></p>
-		    <hr style="margin-top: 5px; margin-bottom: 5px;"> 
-		    <p style="color:red; font-size: 18px; font-family: 'Spectral SC', serif;">$<?php echo $articulo['Precio']; ?></p></a>
-		  </div>
-		</div>
-		
-    <?php endforeach; ?>	
-       
+    		<div id="seleccion_producto" class="col s12 m6 l3">
+		    	<a href="../producto/Producto.php?id=<?php echo $articulo['id']; ?> ">
+		    		<img src="../fotos/<?php echo $articulo['Foto']; ?>" width="200px" ></br>
+		    	<p id="descripcion"><?php echo $articulo['Descripcion']; ?></p>
+		    	<hr style="margin-top: 5px; margin-bottom: 5px;"> 
+		    	<p id="precio">$<?php echo $articulo['Precio']; ?></p></a>
+		 	</div>
+		</div>		
+    	<?php endforeach; ?>	
         </div>
 
-         <ul class="pagination">
+        <ul class="pagination">
 			<!-- Establecer cuando el boton de 'anterior' esta deshabilitado-->
 			<?php if ($pagina == 1): ?>
-				<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+			<li class="disabled">
+				<a href="#!"><i class="material-icons">chevron_left</i></a>
+			</li>
 			<?php else: ?>
-				<li><a href="?pagina=<?php echo $pagina - 1 ?> "><i class="material-icons">chevron_left</i></a></li>
-		    <?php endif ?>
-			 
+			<li>
+				<a href="?pagina=<?php echo $pagina - 1 ?>"><i class="material-icons">chevron_left</i></a>
+			</li>
+		    <?php endif ?>			 
 			<!-- Se ejecuta el ciclo para mostrar las paginas-->
 			<?php 
-			for ($i=1; $i <=$numeroPaginas ; $i++) { 
-				if ($pagina == $i) {
-					echo "<li class='active'><a href='?pagina=$i'>$i</a></li>";
-				} else {
-					echo "<li class='waves-effect'><a href='?pagina=$i'>$i</a></li>";
+				for ($i=1; $i <=$numeroPaginas ; $i++) { 
+					if ($pagina == $i) {
+						echo "<li class='active'><a href='?pagina=$i'>$i</a></li>";
+					} else {
+						echo "<li class='waves-effect'><a href='?pagina=$i'>$i</a></li>";
+					}
 				}
-			}
 			?>
 			<!-- Establecer cuando el boton de 'siguiente' esta deshabilitado-->
 			<?php if ($pagina == $numeroPaginas): ?>
-				<li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+			<li class="disabled">
+				<a href="#!"><i class="material-icons">chevron_right</i></a>
+			</li>
 			<?php else: ?>
-				<li><a href="?pagina=<?php echo $pagina + 1 ?> "><i class="material-icons">chevron_right</i></a></li>
-		    <?php endif ?>
-		    
+			<li>
+				<a href="?pagina=<?php echo $pagina + 1?> "><i class="material-icons">chevron_right</i></a>
+			</li>
+		    <?php endif ?>		    
 		 </ul>
 	</article>
 
     <?php include("../footer/footer.html"); ?>
 
     <style>
+
+    	a:hover {
+    		text-decoration: none;
+    	}
+
+    	#precio {
+			color: red; 
+			font-size: 18px; 
+			font-family: 'Spectral SC', serif;
+    	} 
+
+		#descripcion {
+			color: #343a40;
+			margin-bottom: 5px;
+			margin-top: 10px; 
+			font-family: 'Spectral SC', serif; 
+			font-size: 15px;
+		}
+
 		.section {
 			padding-bottom: 0;
 		}
@@ -123,14 +151,11 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 			border: solid;
 			border-width: 0.5px;
 			border-color: white;
+			transition: border-color 0.5s;
 		}
 
 		#seleccion_producto:hover {
 			border-color: grey;
-		}
-
-		#seleccion_producto {
-			transition: border-color 0.5s;
 		}
 
 		.breadcrumb{
@@ -161,13 +186,14 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 			background-color: grey;
         }
 		
-		.pagination li.active {
-			background-color: black;
-		}
+		
         .pagination {
         	margin-left: 44%;
         	margin-top: 30px;
         }
+        	.pagination li.active {
+				background-color: black;
+		}
 
         #productos {
         	width: 85%;
@@ -176,28 +202,17 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
         	margin-top: 50px;
         	margin-bottom: 100px;
         }
-            #productos a p {
-            	color: #343a40;
-            }
-
-        #slide_boton:hover {    	    	
-    	    	color: white;
-                background: black;
-    	    }
 		
     	article {
     		margin-top: 17px;
     		width: 100%;
 
     	}
-    	img {
-    		max-width: 100%;
-    	}
         
         footer{
         	width: 100%;
         }
-    </style>
 
+    </style>
 </body>
 </html>

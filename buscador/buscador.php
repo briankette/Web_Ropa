@@ -12,13 +12,23 @@ $postPorPagina = 10;
 
 $inicio = ($pagina > 1) ? ($pagina * $postPorPagina - $postPorPagina) : 0;
 
-$articulos = $conexion->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM producto WHERE Categoria = 'Mujer' LIMIT $inicio, $postPorPagina");
+$busca="";
+if ($_POST) {
+	$busca = $_POST['busqueda'];
+}
+
+$articulos = $conexion->prepare(
+	"SELECT SQL_CALC_FOUND_ROWS * FROM producto WHERE Descripcion LIKE '%".$busca."%' LIMIT $inicio, $postPorPagina"
+);
 
 $articulos->execute();
 $articulos = $articulos->fetchAll();
 
 if (!$articulos) {
-	header('location: mujer.php');
+	echo "<script>";
+	echo "alert('No hay ninguna coincidencia.');";  
+	echo "window.location = 'buscador.php';";
+	echo "</script>"; 
 }
 
 $totalArticulos = $conexion->query('SELECT FOUND_ROWS() as total');
@@ -32,7 +42,7 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>DAISING - Mujer</title>
+	<title>DAISING - Buscador</title>
 	<link rel="shortcut icon" type="image/x-icon" href="../fotos/logo.png">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -42,55 +52,56 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 
 	<link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Spectral+SC" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
 </head>
 <body>
 
 	<?php include("..\header\header.php"); ?>
 
-	<nav id="barra" aria-label="breadcrumb" role="navigation">
-	  	<ol class="breadcrumb">
-	    	<li class="breadcrumb-item">
-	    		<a id="bread" href="../pagina_principal/index.php">Inicio</a>
-	    	</li>
-	    	<li class="breadcrumb-item" aria-current="page">
-	    		<a href="../mujer/mujer.php" id="bread">Categoria Mujer</a>
-	    	</li>
-	    	<li class="breadcrumb-item" aria-current="page">
-	    		<a id="bread">Pagina <?php echo $pagina; ?></a>
-	    	</li>
-	  	</ol>
-	</nav>
-
 	<article id="productos">
 		<div class="section">
-		  	<h3>Indumentaria para Mujer</h3>
+			<h3>Buscador</h3>
 			<div id="divider">
-				<hr style="float: left;">
-				<i class="material-icons">store</i>
-				<hr style="float: right;">
+				<hr style="float: left;"><i class="material-icons">search</i><hr style="float: right;">
 			</div>
 		</div>
 
-		<div class="row">
+     	<form class="row" method="POST">
+        	<div id="busca" class="input-field" class="col s6">
+        		<input id="search" type="search" name="busqueda" required>
+        		<label class="label-icon" for="search">
+        			<i class="material-icons">search</i>
+        		</label>
+        	</div>
+        	<div class="col s6">
+        		<button id="boton_buscar" class="btn btn-dark" type="submit">Buscar</button>
+        	</div>
+     	</form>
+
+ 		<div class="row">
+
     	<?php foreach ($articulos as $articulo): ?>
+
     	<div class="row">
     	  	<div id="seleccion_producto" class="col s12 m6 l3">
-		    	<a href="../producto/Producto.php?id=<?php echo $articulo['id']; ?> ">
-		    		<img src="../fotos/<?php echo $articulo['Foto']; ?>" width="200px" ></br>
-		    	<p id="descripcion"><?php echo $articulo['Descripcion']; ?></p>
-		    	<hr style="margin-top: 5px; margin-bottom: 5px;"> 
-		    	<p id="precio">$<?php echo $articulo['Precio']; ?></p></a>
+		    	<a id="a" href="../producto/Producto.php?id=<?php echo $articulo['id']; ?> ">
+		    		<img src="../fotos/<?php echo $articulo['Foto']; ?>" width="200px">
+		    		</br>
+		    		<p id="descripcion"><?php echo $articulo['Descripcion']; ?></p>
+		    		<hr style="margin-top: 5px; margin-bottom: 5px;"> 
+		    		<p id="precio_producto">$<?php echo $articulo['Precio']; ?></p>
+		    	</a>
 		  	</div>
 		</div>
-    	<?php endforeach; ?>	       
+		
+    	<?php endforeach; ?>
+
         </div>
 
         <ul class="pagination">
 			<!-- Establecer cuando el boton de 'anterior' esta deshabilitado-->
 			<?php if ($pagina == 1): ?>
-			<li class="disabled">
-				<a href="#!"><i class="material-icons">chevron_left</i></a>
-			</li>
+			<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
 			<?php else: ?>
 			<li>
 				<a href="?pagina=<?php echo $pagina - 1 ?> "><i class="material-icons">chevron_left</i></a>
@@ -102,20 +113,18 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 					if ($pagina == $i) {
 						echo "<li class='active'><a href='?pagina=$i'>$i</a></li>";
 					} else {
-						echo "<li class='waves-effect'><a href='?pagina=$i'>$i</a></li>";
+					echo "<li class='waves-effect'><a href='?pagina=$i'>$i</a></li>";
 					}
 				}
 			?>
 			<!-- Establecer cuando el boton de 'siguiente' esta deshabilitado-->
 			<?php if ($pagina == $numeroPaginas): ?>
-			<li class="disabled">
-				<a href="#!"><i class="material-icons">chevron_right</i></a>
-			</li>
+			<li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
 			<?php else: ?>
 			<li>
 				<a href="?pagina=<?php echo $pagina + 1 ?> "><i class="material-icons">chevron_right</i></a>
 			</li>
-		    <?php endif ?>		    
+		    <?php endif ?>	    
 		</ul>
 	</article>
 
@@ -123,22 +132,22 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 
     <style>
 
-		a:hover {
-    		text-decoration: none;
-    	}
-
-    	#precio {
-			color: red; 
+		#precio_producto { 
 			font-size: 18px; 
 			font-family: 'Spectral SC', serif;
-    	} 
+			color: red;
+		}
 
-		#descripcion {
-			color: #343a40;
-			margin-bottom: 5px;
-			margin-top: 10px; 
-			font-family: 'Spectral SC', serif; 
-			font-size: 15px;
+    	#descripcion {
+    		margin-bottom: 5px; 
+    		margin-top: 10px; 
+    		font-family: 'Spectral SC', serif; 
+    		font-size: 15px;
+    		color: #343a40;
+    	}
+
+		#a {
+			text-decoration: none;
 		}
 
 		.section {
@@ -154,15 +163,15 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 			transition: border-color 0.5s;
 		}
 
-		#seleccion_producto:hover {
-			border-color: grey;
-		}
+			#seleccion_producto:hover {
+				border-color: grey;
+			}
 
 		.breadcrumb{
 			font-size: 15px;
 		}
 
-		#barra {
+        #barra {
 			margin-top: 17px;
 			height: 40px;
 		}
@@ -187,14 +196,14 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
         }
 
         .pagination {
-        	margin-left: 44%;
+        	margin-left: 41%;
         	margin-top: 30px;
         }
-
-        	.pagination li.active {
-				background-color: black;
-		}
 		
+			.pagination li.active {
+				background-color: black;
+			}
+
 
         #productos {
         	width: 85%;
@@ -203,7 +212,7 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
         	margin-top: 50px;
         	margin-bottom: 100px;
         }
-		
+
     	article {
     		margin-top: 17px;
     		width: 100%;
@@ -214,6 +223,37 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
         	width: 100%;
         }
 
+    	#search {
+    		padding-left: 50px;    		
+    		width: 100%;
+    		margin-bottom: 0;
+    		display: flex;
+    		background: rgba(255, 255, 255, 0.9);     		
+    		border-bottom: none;
+    		font-size: 18px;
+    		font-family: 'Marcellus SC', serif;
+    	} 
+
+    	#busca {
+    		border-style: none;
+    		border-bottom: none;
+    		width: 80%;
+    		display: flex;
+    		-webkit-box-shadow: 0px 3px 24px -1px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 3px 24px -1px rgba(0,0,0,0.75);
+            box-shadow: 0px 3px 24px -1px rgba(0,0,0,0.75);
+            z-index: 100;
+    	}
+
+    	 #boton_buscar {
+            background-color: black;
+            font-size: 13px;
+            font-family: 'Marcellus SC', serif;
+            margin-top: 20px;
+        }
+           #boton_buscar:hover {
+               background-color: #444444;
+           }
     </style>
 </body>
 </html>

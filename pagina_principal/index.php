@@ -1,6 +1,5 @@
 <?php session_start();
 
-
 try{
 	$conexion = new PDO('mysql:host=localhost;dbname=proyecto_final', 'root', 'brian');	
 }catch(PDOException $e){
@@ -36,9 +35,6 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 	<meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0, maximum-scale=1.0">
 	<title>DAISING - Inicio</title>
 	<link rel="shortcut icon" type="image/x-icon" href="../fotos/logo.png">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -47,9 +43,6 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 
 	<link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Spectral+SC" rel="stylesheet">
-	<!--Animaciones-->
-	<link rel="stylesheet" type="text/css" media="all" href="../animate.css">
-	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 	<script>
 		$(document).ready(function(){
@@ -58,6 +51,7 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 	      $('.slides').height('550');
 	    });
 	</script>
+	
 </head>
 <body>
 	<?php include("..\header\header.php"); ?>
@@ -69,8 +63,8 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 	      <li>
 	        <img src="fotos/moda_d.jpg">
 	        <div class="caption left-align">
-	          <h3 class="titulo" style="font-size: 40px;">Tendencia, diseño y calidad</h3>
-	          <h5 style="font-family: 'Marcellus SC', serif; font-size: 20px;" class="titulo">20% off hasta 30 de noviembre.</h5>
+	          <h3 class="titulo">Tendencia, diseño y calidad</h3>
+	          <h5 style="font-size: 20px;" class="titulo">20% off hasta 30 de noviembre.</h5>
 	        </div>
 	      </li>	
 	      <li>
@@ -94,37 +88,42 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
     <div class="divider"></div>
 	
 	
-	<article id="productos">
+    <article id="productos">
 		<div class="section">
-		  <h3>Toda la colección</h3>
-		<div id="divider"><hr style="float: left;"><i class="material-icons">store</i><hr style="float: right;"></div>
+			<h3>Toda la colección</h3>
+			<div id="divider">
+				<hr style="float: left;"><i class="material-icons">store</i><hr style="float: right;">
+			</div>
 		</div>
 		<div class="row">
 
     <?php foreach ($articulos as $articulo): ?>
+    	
     	<div class="row">
-    	  <div id="seleccion_producto" class="col s12 m6 l3">
-		    <a style="text-decoration:none" href="../producto/Producto.php?id=<?php echo $articulo['id']; ?> ">
-		    <img id="foto" src="../fotos/<?php echo $articulo['Foto']; ?>" >
-		    </br>
-		    <p style="margin-bottom: 5px; margin-top: 10px; font-family: 'Spectral SC', serif; font-size: 15px;"><?php echo $articulo['Descripcion']; ?></p>
-		    <hr style="margin-top: 5px; margin-bottom: 5px;"> 
-		    <p style="color:red; font-size: 18px; font-family: 'Spectral SC', serif;">$<?php echo $articulo['Precio']; ?></p></a>
-		  </div>
+        	<div id="seleccion_producto" class="col s12 m6 l3">
+		    	<a style="text-decoration:none" href="../producto/Producto.php?id=<?php echo $articulo['id']; ?> ">
+		    		<img id="foto" src="../fotos/<?php echo $articulo['Foto']; ?>" >
+		    		</br>
+		    		<p id="nombre_producto"><?php echo $articulo['Descripcion']; ?></p>
+		    		<hr style="margin-top: 5px; margin-bottom: 5px;"> 
+		    		<p id="precio_producto">$<?php echo $articulo['Precio']; ?></p>
+		    	</a>
+            </div>
 		</div>
 
     <?php endforeach; ?>	
        
         </div>
 
-         <ul class="pagination">
+        <ul class="pagination">
 			<!-- Establecer cuando el boton de 'anterior' esta deshabilitado-->
 			<?php if ($pagina == 1): ?>
-				<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+			<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
 			<?php else: ?>
-				<li><a href="?pagina=<?php echo $pagina - 1 ?> "><i class="material-icons">chevron_left</i></a></li>
-		    <?php endif ?>
-			 
+			<li>
+				<a href="?pagina=<?php echo $pagina - 1 ?> "><i class="material-icons">chevron_left</i></a>
+			</li>
+		    <?php endif ?> 
 			<!-- Se ejecuta el ciclo para mostrar las paginas-->
 			<?php 
 			for ($i=1; $i <=$numeroPaginas ; $i++) { 
@@ -137,17 +136,38 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 			?>
 			<!-- Establecer cuando el boton de 'siguiente' esta deshabilitado-->
 			<?php if ($pagina == $numeroPaginas): ?>
-				<li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+			<li class="disabled">
+				<a href="#!"><i class="material-icons">chevron_right</i></a>
+			</li>
 			<?php else: ?>
-				<li><a href="?pagina=<?php echo $pagina + 1 ?> "><i class="material-icons">chevron_right</i></a></li>
-		    <?php endif ?>
-		    
-		 </ul>
-	</article>
+			<li>
+				<a href="?pagina=<?php echo $pagina + 1 ?> "><i class="material-icons">chevron_right</i></a>
+			</li>
+		    <?php endif ?>		    
+		</ul>
+    </article>
 
     <?php include("../footer/footer.html"); ?>
 
     <style>
+    	a {
+    		text-decoration: none;
+    	}
+
+		#precio_producto {
+			color: #ff0000; 
+			font-size: 18px; 
+			font-family: 'Spectral SC', serif;
+			color: red;
+		}
+
+    	#nombre_producto {
+    		margin-bottom: 5px; 
+    		margin-top: 10px; 
+    		font-family: 'Spectral SC', serif; 
+    		font-size: 15px;
+    		color: #343a40;
+    	} 
 
 		.section {
 			padding-bottom: 0;
@@ -161,9 +181,9 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 			border-color: white;
 		}
 
-		#seleccion_producto:hover {
-			border-color: grey;
-		}
+			#seleccion_producto:hover {
+				border-color: grey;
+			}
 
 		#seleccion_producto {
 			transition: border-color 0.5s;
@@ -175,6 +195,8 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 		}
 
 		.titulo {
+			font-family: 'Marcellus SC', serif;
+			font-size: 45px;
 			position: relative;
 			right: 16%;
 			top: 90px;
@@ -192,15 +214,15 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
         hr {
         	width: 47%;
 			background-color: grey;
-        }
+        }		
 		
-		.pagination li.active {
-			background-color: black;
-		}
         .pagination {
         	margin-left: 42%;
         	margin-top: 30px;
         }
+        	.pagination li.active {
+				background-color: black;
+			}
 
         #productos {
         	width: 85%;
@@ -209,9 +231,6 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
         	margin-top: 50px;
         	margin-bottom: 100px;
         }
-            #productos a p {
-            	color: #343a40;
-            }
 
         #slide_boton:hover {    	    	
     	    	color: white;

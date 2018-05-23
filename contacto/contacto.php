@@ -15,9 +15,6 @@ $errores = '';
 	<meta charset="UTF-8">
 	<title>DAISING - Contacto</title>
 	<link rel="shortcut icon" type="image/x-icon" href="../fotos/logo.png">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -28,43 +25,45 @@ $errores = '';
 	<link href="https://fonts.googleapis.com/css?family=Spectral+SC" rel="stylesheet">
 </head>
 <body>
-	<?php include("..\header\header.php"); ?>
 
+	<?php include("..\header\header.php"); ?>
 		
 	<article id="contacto">
-		  <div class="section">
+		<div class="section">
 			<h3>Contactame</h3>
-			<div id="divider"><hr style="float: left;"><i class="material-icons">question_answer</i><hr style="float: right;"></div>
-		  </div>
+			<div id="divider">
+				<hr style="float: left;"><i class="material-icons">question_answer</i><hr style="float: right;">
+			</div>
+		</div>
 
-		  <div id="formulario" class="row">
+		<div id="formulario" class="row">
 		    <form class="col s12">
-		      <div class="row">
-		        <div class="input-field col s12">
-		          <i class="material-icons prefix">assignment_ind</i>
-		          <input id="nombre" type="text" class="validate">
-		          <label for="icon_prefix">Nombre</label>
-		        </div>
-		      </div>
-		      <div class="row">
-		        <div class="input-field col s12">
-		          <i class="material-icons prefix">mail</i>
-		          <input id="email" type="email" class="validate">
-		          <label for="email">Email</label>
-		        </div>
-		      </div>
-		      <div class="row">
-		        <div class="input-field col s12">
-		          <i class="material-icons prefix">mode_edit</i>
-		          <textarea id="mensaje" class="materialize-textarea"></textarea>
-		          <label for="icon_prefix2">Mensaje</label>
-		        </div>
-		      </div>
+		      	<div class="row">
+		        	<div class="input-field col s12">
+		          		<i class="material-icons prefix">assignment_ind</i>
+		          		<input id="nombre" type="text" class="validate">
+		          		<label for="icon_prefix">Nombre</label>
+		        	</div>
+		      	</div>
+		      	<div class="row">
+		        	<div class="input-field col s12">
+		          		<i class="material-icons prefix">mail</i>
+		          		<input id="email" type="email" class="validate">
+		          		<label for="email">Email</label>
+		        	</div>
+		      	</div>
+		      	<div class="row">
+		        	<div class="input-field col s12">
+		          		<i class="material-icons prefix">mode_edit</i>
+		          		<textarea id="mensaje" class="materialize-textarea"></textarea>
+		         		<label for="icon_prefix2">Mensaje</label>
+		        	</div>
+		      	</div>
 		    </form>
-		  </div>		  
-		  <button id="enviar" class="btn waves-effect waves-light" type="submit" name="action">ENVIAR
+		</div>		  
+		<button id="enviar" class="btn btn-dark" type="submit" name="action">ENVIAR
 		    <i id="flecha" class="material-icons right">send</i>
-		  </button>      
+		</button>      
 	</article>
 
 	<?php include("../footer/footer.html"); ?>

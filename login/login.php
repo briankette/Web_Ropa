@@ -1,7 +1,7 @@
 <?php session_start();
 
-if(isset($_SESSION['usuario'])) {
-   header('location: ../pagina_principal/index.php');
+if (isset($_SESSION['usuario'])) {
+    header('location: ../pagina_principal/index.php');
 }
 
 $errores = '';
@@ -12,9 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pass = hash('sha512', $pass);
 
     try {
-         $conexion = new PDO('mysql:host=localhost;dbname=proyecto_final', 'root', 'brian');
+        $conexion = new PDO('mysql:host=localhost;dbname=proyecto_final', 'root', 'brian');
     } catch (PDOExpedition $e) {
-         echo "Error: " . $e->getMessage();
+        echo "Error: " . $e->getMessage();
     }
 
     $statement = $conexion->prepare('SELECT * FROM usuario WHERE usuario = :usuario AND Password = :pass');
@@ -22,22 +22,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $resultado = $statement->fetch();
     if ($resultado !== false) {
-    	$_SESSION['usuario'] = $usuario;
-    	header('Location: ../pagina_principal/index.php');
+    	  $_SESSION['usuario'] = $usuario;
+    	  header('Location: ../pagina_principal/index.php');
     } else {
-    	$errores .= '<li>Email o contraseña incorectos.</li>';
+    	  $errores .= '<li>Email o contraseña incorectos.</li>';
     }
 }
-
- ?>
-
+?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8"></meta>
-	<title>DAISING - Login</title>
-  <link rel="shortcut icon" type="image/x-icon" href="../fotos/logo.png">
+    <meta charset="UTF-8"></meta>
+    <title>DAISING - Login</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../fotos/logo.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
@@ -45,10 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
 </head>
 <body>
-	<div id="formularios">
+    <div id="formularios">
         <form id="login" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">  
-          <div  id="text"><h3>Acceder</h3></div>
-          <a id="home" href="../pagina_principal/index.php"><i class="material-icons">cancel</i></a>                   
+            <div  id="text"><h3>Acceder</h3></div>
+            <a id="home" href="../pagina_principal/index.php"><i class="material-icons">cancel</i></a>
               <div class="row">
                 <div class="input-field col s12">
                   <input id="email" type="email" name="usuario" class="validate" required value=" <?php if($errores && isset($usuario)) echo $usuario ?>"></input>
@@ -68,12 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   </div>
                 <?php endif; ?>
               </div>
-              <i id="boton" class="btn waves-effect waves-light"  onclick="login.submit()">ACCEDER</i>
-              
+              <i id="boton" class="btn waves-effect waves-light"  onclick="login.submit()">ACCEDER</i>    
         </form>
         <div id="registro">
-        <p>¿Aun no estas registrado?</p>
-        <a id="registro" href="../registro/registro.php">REGISTRATE</a>
+            <p>¿Aun no estas registrado?</p>
+            <a id="registro" href="../registro/registro.php">REGISTRATE</a>
         </div>
     </div>
 
@@ -97,16 +94,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
     		p {
-    			margin-bottom: 0px;
-    			font-size: 15px;
+            margin-bottom: 0px;
+            font-size: 15px;
     		}
 
     		a:hover {
-    			color: red;
+            color: red;
     		}
 
         .error {
-          color: red;
+            color: red;
 
         }
 
@@ -128,19 +125,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         #home {
-          float: right;
-          margin-right: 10px;
-          margin-top: 10px;
-          color: black;
+            float: right;
+            margin-right: 10px;
+            margin-top: 10px;
+            color: black;
         }
-           #home:hover {
-              color: #444444;
-           }
+            #home:hover {
+                color: #444444;
+            }
 
         #text {
-          width: 200px;
-          margin-right: 0px;
-          float: left;
+            width: 200px;
+            margin-right: 0px;
+            float: left;
         }
 
         #login {
@@ -154,9 +151,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-size: 13px;
             font-family: 'Marcellus SC', serif;
         }
-           #boton:hover {
-               background-color: #444444;
-           }
+            #boton:hover {
+                background-color: #444444;
+            }
 
     </style>
 </body>

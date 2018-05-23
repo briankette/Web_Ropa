@@ -5,7 +5,7 @@ $errores = '';
 if(isset($_SESSION['usuario'])) {
    header('location: ../pagina_principal/index.php');
 }
-//
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $usuario = filter_var(strtolower($_POST['usuario']), FILTER_SANITIZE_STRING);
   $pass = $_POST['pass'];
@@ -63,39 +63,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div id="formularios">
         <form id="registro" name="login" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-          <div  id="text"><h3>Registrarse</h3></div>
-          <a id="home" href="../pagina_principal/index.php"><i class="material-icons">cancel</i></a>
-             <div class="row">         
+            <div  id="text">
+                <h3>Registrarse</h3>
+            </div>
+            <a id="home" href="../pagina_principal/index.php"><i class="material-icons">cancel</i></a>
+            <div class="row">         
                 <div class="input-field col s12">
-                  <input id="email" type="email" name="usuario" class="validate" required value=" <?php if($errores && isset($usuario)) echo $usuario ?>"></input>
+                  <input id="email" type="email" name="usuario" class="validate" required value="<?php if($errores && isset($usuario)) echo $usuario ?>"></input>
                   <label for="email" data-error="" data-success="">Email</label>
                 </div>
-             </div>
-             <div class="row">
+            </div>
+            <div class="row">
                 <div class="input-field col s12">
-                  <input id="password" name="pass" type="password" class="validate" required></input>
-                  <label for="password">Contraseña</label>
+                    <input id="password" name="pass" type="password" class="validate" required></input>
+                    <label for="password">Contraseña</label>
                 </div>
-             </div>
-             <div class="row">
+            </div>
+            <div class="row">
                 <div class="input-field col s12">
-                  <input id="password2" name="pass2" type="password" class="validate" required></input>
-                  <label for="password">Confirmar Contraseña</label>
+                    <input id="password2" name="pass2" type="password" class="validate" required></input>
+                    <label for="password">Confirmar Contraseña</label>
                 </div>
                 <?php if(!empty($errores)): ?>
                   <div class="error">
-                     <ul>
-                       <?php echo $errores; ?>
-                     </ul>
+                      <ul><?php echo $errores; ?></ul>
                   </div>
                 <?php endif; ?>
-             </div>
-
-             <i id="boton2" class="btn waves-effect waves-light"  onclick="login.submit()">REGISTRARSE</i>
+            </div>
+            <i id="boton2" class="btn waves-effect waves-light"  onclick="login.submit()">REGISTRARSE</i>
         </form> 
         <div id="login">
-        <p>¿Ya tenes una cuenta?</p>
-        <a id="registro" href="../login/login.php">ACCEDE</a>
+            <p>¿Ya tenes una cuenta?</p>
+            <a id="registro" href="../login/login.php">ACCEDE</a>
         </div>
     </div>
 

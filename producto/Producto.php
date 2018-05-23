@@ -21,18 +21,14 @@ $articulo = $statement->fetch();
 if (!$articulo) {
 	header('Location: ../pagina_principal/index.php');
 }
-
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<title>DAISING - Producto</title>
 	<link rel="shortcut icon" type="image/x-icon" href="../fotos/logo.png">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<!-- materialize -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -45,53 +41,50 @@ if (!$articulo) {
 </head>
 <body>
 
-
-
 	<?php include("..\header\header.php"); ?>
 
 	<article id="detalle">
 		<div class="section">
-		  <h3>Detalle de producto</h3>
-		  <div id="divider">
-		    <hr style="float: left;"><i class="material-icons">zoom_in</i><hr style="float: right;">
-		  </div>
+		  	<h3>Detalle de producto</h3>
+		  	<div id="divider">
+		    	<hr style="float: left;">
+		    	<i class="material-icons">zoom_in</i>
+		    	<hr style="float: right;">
+		  	</div>
 		</div>
 
 		<div class="row">
-	      <div id="izquierda" class="col s6">
-	      	<img class="z-depth-5" id="foto" src="../fotos/<?php echo $articulo['Foto']; ?>">
-	      </div>
-	      <div id="derecha" class="col s6">
-	      	<p id="nombre"> <?php if (!empty($articulo['Descripcion'])) {
-	      		echo $articulo['Descripcion'];
-	      	} ?> </p>
-	      	<p id="genero"><?php echo $articulo['Categoria']; ?></p>
-	      	<hr>
-	      	<p id="precio">$<?php echo $articulo['Precio']; ?></p>
-			<div id="tyc">
-		      	<select style="float: left;" id="talle" class="form-control">
-		      	  <option disabled selected>Talle :</option>
-				  <option>S</option>
-				  <option>M</option>
-				  <option>X</option>
-				  <option>XL</option>
-				</select>
-				<button style="float: right;" id="comprar" class="btn waves-effect waves-light" type="submit" name="action">COMPRAR
-				  <i id="cart" class="material-icons right">shopping_cart</i>
-				</button>
+	      	<div id="izquierda" class="col s6">
+	      		<img class="z-depth-5" id="foto" src="../fotos/<?php echo $articulo['Foto']; ?>">
+	      	</div>
+	      	<div id="derecha" class="col s6">
+	      		<p id="nombre">
+	      			<?php if (!empty($articulo['Descripcion'])) { echo $articulo['Descripcion']; } ?>
+	      		</p>
+	      		<p id="genero">
+	      			<?php echo $articulo['Categoria']; ?>
+	      		</p>
+	      		<hr>
+	      		<p id="precio">
+	      			$<?php echo $articulo['Precio']; ?>
+	      		</p>
+				<div id="tyc">
+		      		<select style="float: left;" id="talle" class="form-control">
+		      	  	<option disabled selected>Talle :</option>
+				  	<option>S</option>
+				  	<option>M</option>
+				  	<option>X</option>
+				  	<option>XL</option>
+					</select>
+					<a style="text-decoration:none" href="../carrito/carrito.php?id=<?php echo $articulo['id']; ?> " id="añadir" class="waves-effect waves-light btn-flat"><i id="icono" class="material-icons right">local_grocery_store</i>AÑADIR</a>
+				</div>
 			</div>
-		  </div>
-	    </div>
-			
+	    </div>			
 	</article>
 
 	<?php include("../footer/footer.html"); ?>
 
 	<style>
-
-		p {
-
-		}
 
 		.row {
 			width: 100%;
@@ -176,6 +169,20 @@ if (!$articulo) {
 			margin: auto;
 		}
 
+        #añadir {
+            background-color: black;
+            font-size: 13px;
+            font-family: 'Marcellus SC', serif;
+            color: white;
+        }
+           #añadir:hover {
+               background-color: #444444;
+           }
+
+    	#icono {
+			padding-left: 10px;
+		}
+    
     </style>
 	
 </body>
