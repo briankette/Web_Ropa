@@ -3,11 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>navbar</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
+    <script>
+        $(function(){         
+            $(".dropdown-trigger").dropdown();      
+        });       
+    </script>
 </head>
 <body>
 	<header>
@@ -31,7 +36,7 @@
                     <a href="../carrito/carrito.php" id="chango" class="waves-effect waves-light btn-flat"><i id="icon_user" class="material-icons right">local_grocery_store</i></a>
                     <ul id="nav-mobile" class="left hide-on-med-and-down">
                         <li><a href="../pagina_principal/index.php">Inicio</a></li>
-                        <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Categorias<i class="material-icons right">arrow_drop_down</i></a></li>
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categorias<i class="material-icons right">arrow_drop_down</i></a></li>
                         <li><a href="../sobre_mi/sobre_mi.php">Sobre mi</a></li>
                         <li><a href="../contacto/contacto.php">Contacto</a></li>
                         <li id="boton"><a href="../buscador/buscador.php"><i class="material-icons right">search</i></a></li>   

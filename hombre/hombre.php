@@ -123,6 +123,10 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 
     <style>
 
+    	body {
+			background-color: #F0F0F0;
+		}
+
     	a:hover {
     		text-decoration: none;
     	}
@@ -150,7 +154,7 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 			position: unset;
 			border: solid;
 			border-width: 0.5px;
-			border-color: white;
+			border-color: #F0F0F0;
 			transition: border-color 0.5s;
 		}
 
@@ -160,6 +164,7 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 
 		.breadcrumb{
 			font-size: 15px;
+			background-color: #DEDEDE;
 		}
 
         #barra {

@@ -70,6 +70,10 @@ $errores = '';
 
 	<style>
 
+		body {
+			background-color: #F0F0F0;
+		}
+
 		#flecha {
 			padding-left: 10px;
 		}

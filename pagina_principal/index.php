@@ -150,6 +150,10 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
     <?php include("../footer/footer.html"); ?>
 
     <style>
+		body {
+			background-color: #F0F0F0;
+		}
+
     	a {
     		text-decoration: none;
     	}
@@ -178,7 +182,7 @@ $numeroPaginas = ceil($totalArticulos / $postPorPagina);
 			position: unset;
 			border: solid;
 			border-width: 0.5px;
-			border-color: white;
+			border-color: #F0F0F0;
 		}
 
 			#seleccion_producto:hover {

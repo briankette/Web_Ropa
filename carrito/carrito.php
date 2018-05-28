@@ -108,8 +108,7 @@
 									<th scope="col">Cantidad</th>
 									<th scope="col">Total</th>
 								</tr>
-							</thead>';
-		 
+							</thead>';		 
 			}
  		?>
 			  
@@ -132,24 +131,30 @@
 			    		data-id="$<?php echo $datos[$i]['id'];?>">
 			    	</td>
 			    	<td class="subtotal">$<?php echo $datos[$i]['Canti']*$datos[$i]['Price'];?></td>
-			    
-	      	<?php
+			    </tr>
+
+		<?php 
 				$total=($datos[$i]['Price']*$datos[$i]['Canti'])+$total;
 				}
 			}
-			?>
-				</tr>
-			</tbody>
-		</table>
 
-		<?php 
 			if (isset($_SESSION['carrito'])) {	
-				echo  '<h3 id="total" scope="col">$ '.$total.'</h3>';
+				echo ' <tr id="num_total">
+						 <td>Total a pagar: </td>
+						 <td></td>
+						 <td></td>
+						 <td></td>
+						 <td style="color: red;">$'.$total.'</td>
+					   </tr>
+					 ';
 		 
 			}else{
 				echo '<center><h4 id="mensaje">El carrito de compras está vacio.</h4></center>';
 			}
  		?>
+				
+			</tbody>
+		</table> 		
 		
 		<a style="text-decoration:none" href="../pagina_principal/index.php" id="volver" class="waves-effect waves-light btn-flat"><i id="icono" class="material-icons right">local_grocery_store</i>Volver a la tienda</a>
 
@@ -167,11 +172,20 @@
 
 	<style>
 
+		body {
+			background-color: #F0F0F0;
+		}
+
 		#tabla {
-			margin-top: 30px;
+			margin-top: 40px;
+			margin-bottom: 50px;
 			font-family: 'Cinzel', serif;
 			font-size: 18px;
-
+		}
+		
+		#num_total {
+			font-size: 24px;
+			background-color: #DEDEDE;
 		}
 
 		td {
@@ -189,7 +203,7 @@
 		}
 
 		#mensaje {
-			margin-bottom: 30px;
+			margin: 50px;
 		}
 
 		#carrito {
@@ -203,6 +217,7 @@
 		h3 {
 			font-family: 'Marcellus SC', serif;
 			font-size: 30px;
+			margin: 30px;
 		}
 
 		h4 {
@@ -223,10 +238,6 @@
            #enviar:hover {
                background-color: #444444;
            }
-
-        #tabla {
-        	margin-top: 50px;
-        }
 
         #volver {
             background-color: black;

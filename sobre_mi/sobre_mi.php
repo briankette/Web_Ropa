@@ -67,6 +67,10 @@ try{
 
 	<style>
 
+		body {
+    		background-color: #F0F0F0;
+    	}
+
 		p {
 			font-family: 'Cinzel', serif;
 			font-size: 18px;

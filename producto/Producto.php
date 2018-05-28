@@ -29,6 +29,7 @@ if (!$articulo) {
 	<meta charset="UTF-8">
 	<title>DAISING - Producto</title>
 	<link rel="shortcut icon" type="image/x-icon" href="../fotos/logo.png">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -38,6 +39,11 @@ if (!$articulo) {
 	<link href="https://fonts.googleapis.com/css?family=Marcellus+SC" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Spectral+SC" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+	<script>
+		  $(document).ready(function(){
+		    $('.materialboxed').materialbox();
+		  });
+	</script>
 </head>
 <body>
 
@@ -55,7 +61,7 @@ if (!$articulo) {
 
 		<div class="row">
 	      	<div id="izquierda" class="col s6">
-	      		<img class="z-depth-5" id="foto" src="../fotos/<?php echo $articulo['Foto']; ?>">
+	      		<img class="z-depth-5 materialboxed" id="foto" src="../fotos/<?php echo $articulo['Foto']; ?>">
 	      	</div>
 	      	<div id="derecha" class="col s6">
 	      		<p id="nombre">
@@ -85,6 +91,10 @@ if (!$articulo) {
 	<?php include("../footer/footer.html"); ?>
 
 	<style>
+
+		body {
+    		background-color: #F0F0F0;
+    	}
 
 		.row {
 			width: 100%;
